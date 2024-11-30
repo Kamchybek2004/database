@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Список книг</h2>
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Автор</th>
+        <th>Дата публикации</th>
+        <th>ISBN</th>
+        <th>Действия</th>
+    </tr>
+    {% for book in books %}
+    <tr>
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.published_date }}</td>
+        <td>{{ book.isbn_number }}</td>
+        <td>
+            <a href="{% url 'book_edit' book.pk %}">Редактировать</a>  <!-- Ссылка на редактирование -->
+            <a href="{% url 'book_delete' book.pk %}">Удалить</a>  <!-- Ссылка на удаление -->
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'book_create' %}">Добавить книгу</a>
+<br>
+
+<h1>Погода в {{ weather_data.name }}</h1>
+<p>Температура: {{ weather.data.main.temp }} C</p>
+<p>Погодные условия: {{ weather_data.weather.0.description }}</p>
+{% endblock %}
